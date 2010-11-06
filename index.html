@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-  <title>jSlide v0.4</title>
+  <title>jSlide v0.5</title>
 
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/slideshow.css">
@@ -10,44 +10,26 @@
     </script>
     <script type="text/javascript" src="js/jquery.easing-1.3.js">
     </script>
-    <script type="text/javascript" src="js/jquery.slide-0.4.3.js">
+    <script type="text/javascript" src="js/jquery.slide-0.5.js">
     </script>
 
     <script type="text/javascript">
 
     jQuery(function(){
+    
         $('div#example').slide({
-            preloadImg: false
+        	debug: 1,
+            preloadImg: false,
+            showPanelUrl: 0,
+            panelList: 'custom'
         });
         
-        $('div#showcase').slide({
-            title_id: 1
+        $('div#example2').slide({
+        	debug: 0,
+        	showPanelUrl: 0,
+        	panelList: 'custom'
         });
 
-        $('div#showcase2').slide({
-            loop: [1, 500]
-        });
-        $('#stoploop').click(function(){
-            $('div#showcase2').slide().toggleLoop();
-            return false;
-        });
-
-        $('div#showcase3').slide({
-            direction: 'right'
-        });
-
-        $('div#showcase4').slide({
-            direction: 'bottom'
-        });
-        
-        $('div#showcase5').slide({
-            easing: 'easeInExpo'
-        });
-        
-        $('div#showcase6').slide({
-            caption: 'caption'
-        });
-        
     });
 
     </script>
@@ -57,168 +39,58 @@
 
 <div id="container">
 
-    <div id="example">
-        <ul class="layers">
-            <li title="About">
+    <div id="example" class="jslide-container">
+        <ul class="showcase">
+            <li class="panel" title="About">
                 <div class="container">
                     <h2>About</h2> jslide is a <a href="http://jquery.com/" target="_blank">jQuery</a> plugin to create a simple slideshow of list elements, containing either images or other content. It's currently in an early development stage, but basic features are already integrated.
                 </div>
             </li>
-            <li title="two">
+            <li class="panel" title="Boat">
                 <img src="images/example_2.jpg" width="1000" height="460" border="0" alt="" />
             </li>
-            <li title="three">
+            <li class="panel" title="Plane">
                 <img src="images/example_3.jpg" width="1000" height="460" border="0" alt="" />
             </li>
         </ul>
 
-        <a href="#" class="prevwork">Prev</a>
-        <ul class="indexwork"><li></li></ul>
-        <a href="#" class="nextwork">Next</a>
+        <a href="#" class="jslide-previous">Prev</a>
         <br />
-    </div>
-
-    <a name="title_id"></a>
-
-    <div id="showcase" class="showcase">
-        <ul  class="layers">
-            <li title="one"><b>i:</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</li>
-            <li title="two"><b>ii:</b> Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-            <li title="three"><b>iii:</b> Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</li>
-            <li title="four"><b>iv:</b> Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</li>
-            <li title="five"><b>v:</b> In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.</li>
-        </ul>
-
-        <a href="#" class="prevwork">Prev</a>
-        <ul class="indexwork"></ul>
-        <a href="#" class="nextwork">Next</a>
-        <br />
-    </div>
-    <div>
-        <a href="http://code.google.com/p/jslide/" title="Back to GoogleCODE">Back</a>
-        <h1>Using <i>title_id</i></h1>
-        Make sure the title-Attribute is not empty and alphanumeric when you enable this option.
-    </div>
-
-    <br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;
-
-    <a name="loop"></a>
-
-    <div id="showcase2" class="showcase">
-        <ul class="layers">
-            <li><b>i:</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</li>
-            <li><b>ii:</b> Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-            <li><b>iii:</b> Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</li>
-            <li><b>iv:</b> Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</li>
-        </ul>
-
-        <a href="#" class="prevwork">Prev</a>
-        <ul class="indexwork"></ul>
-        <a href="#" class="nextwork">Next</a>
-        <br />
-    </div>
-    <div>
-        <a href="http://code.google.com/p/jslide/" title="Back to GoogleCODE">Back</a>
-        <h1>Using <i>loop</i></h1>
-        This slideshow will automatically slide to the next element every 2000 millisecs (it's the default value of <i>speed</i>). If the user clicks, e.g. the Next-Button, the slideshow slides every 500 millisecs.
+        
         <p>
-        <a href="#" id="stoploop">Stop the loop</a> $('div#showcase2').slide().toggleLoop();
-        </p>
+        	<a class="jslide-panellist" href="#About">About</a> | <a class="jslide-panellist" href="#Boat">Boat</a> | <a class="jslide-panellist" href="#3">Plane</a>
+        </p> 
     </div>
-
-    <br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;
-
-    <a name="direction"></a>
-
-    <div id="showcase3" class="showcase">
-        <ul class="layers">
-            <li><b>i:</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</li>
-            <li><b>ii:</b> Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-            <li><b>iii:</b> Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</li>
-            <li><b>iv:</b> Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</li>
+    <a href="#" rel="example" class="jslide-previous">Previous</a>
+    <a href="#" rel="example" class="jslide-next">Next</a>
+            
+ 
+    <div id="example2" class="jslide-container">
+        <ul class="showcase">
+            <li class="panel" title="About">
+                <div class="container">
+                    <h2>About</h2> jslide is a <a href="http://jquery.com/" target="_blank">jQuery</a> plugin to create a simple slideshow of list elements, containing either images or other content. It's currently in an early development stage, but basic features are already integrated.
+                </div>
+            </li>
+            <li class="panel" title="Boat">
+                <img src="images/example_2.jpg" width="1000" height="460" border="0" alt="" />
+            </li>
+            <li class="panel" title="Plane">
+                <img src="images/example_3.jpg" width="1000" height="460" border="0" alt="" />
+            </li>
         </ul>
 
-        <a href="#" class="prevwork">Prev</a>
-        <ul class="indexwork"></ul>
-        <a href="#" class="nextwork">Next</a>
+        <a href="#" class="jslide-previous">Prev</a>
         <br />
-    </div>
-    <div>
-        <a href="http://code.google.com/p/jslide/" title="Back to GoogleCODE">Back</a>
-        <h1>Using <i>direction</i></h1>
-        direction: 'right'
+        
+
     </div>
 
-    <br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;
-
-    <a name="alignment"></a>
-
-    <div id="showcase4" class="showcase">
-        <ul class="layers">
-            <li><b>i:</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</li>
-            <li><b>ii:</b> Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-            <li><b>iii:</b> Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</li>
-            <li><b>iv:</b> Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</li>
-        </ul>
-
-        <a href="#" class="prevwork">Prev</a>
-        <ul class="indexwork"></ul>
-        <a href="#" class="nextwork">Next</a>
-        <br />
-    </div>
-    <div>
-        direction: 'top'
-    </div>
-    
-    <br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;
-    
-    <div id="showcase5" class="showcase">
-        <ul class="layers">
-            <li><b>i:</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</li>
-            <li><b>ii:</b> Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</li>
-            <li><b>iii:</b> Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</li>
-            <li><b>iv:</b> Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</li>
-        </ul>
-
-        <a href="#" class="prevwork">Prev</a>
-        <ul class="indexwork"></ul>
-        <a href="#" class="nextwork">Next</a>
-        <br />
-    </div>
-    <div>
-        <a href="http://code.google.com/p/jslide/" title="Back to GoogleCODE">Back</a>
-        <h1>Using <i>easing</i></h1>
-        easing: 'easeInExpo'
-    </div>    
-    
-    <br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;
-    
-    <a name="caption"></a>
-    
-    <div id="showcase6" class="showcase">
-        <ul class="layers">
-            <li><b>i:</b> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. <p class="caption">Caption for <b>i</b></p></li>
-            <li><b>ii:</b> Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. <p class="caption">Caption for <b>ii</b></p></li>
-            <li><b>iii:</b> Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. <p class="caption">Caption for <b>iii</b></p></li>
-            <li><b>iv:</b> Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</li>
-        </ul>
-
-        <a href="#" class="prevwork">Prev</a>
-        <ul class="indexwork"></ul>
-        <a href="#" class="nextwork">Next</a>
-        <div class="caption"><i>No Caption available</i></div>
-        <br />
-    </div>
-    <div>
-        <a href="http://code.google.com/p/jslide/" title="Back to GoogleCODE">Back</a>
-        <h1>Using <i>caption</i></h1>
-        caption: 'caption'
-    </div>        
-
-    <br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;
-    <br />&nbsp;<br />&nbsp;<br />&nbsp;<br />&nbsp;
-
-    
+        <p>
+        	<a class="jslide-panellist" rel="example2" href="#About">About</a> | <a class="jslide-panellist" rel="example2" href="#Boat">Boat</a> | <a class="jslide-panellist example2" href="#3">Plane</a>
+        </p> 
+    <a href="#" rel="example2" class="jslide-next">Next</a>          
+       
 </div>
 
 </body>
