@@ -1,0 +1,36 @@
+/*
+  slideshow.css
+  ==
+  This is the essential CSS markup that is required for jSlide to work properly.
+*/
+
+.jslide-container {
+    position: relative;
+    }
+
+.jslide-container .showcase {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    clear: both;
+    position: relative;
+    top: 0;
+    left: 0;
+    }
+
+    .jslide-container .showcase .panel {
+        float: left;
+        position: absolute;
+        }
+
+
+        
+.active {
+    color: #000;
+    text-decoration: none;
+    }
+    
+.loading {
+    background: url(../images/ajax-loader.gif) no-repeat center #DDD !important;
+    }
