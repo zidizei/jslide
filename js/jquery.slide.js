@@ -1,11 +1,15 @@
 // jquery.slide.js
-// -0.5
+// -0.5.1
 // Author: Patrick Lam (zidizei.com)
-// Project URL: http://code.google.com/p/jslide/
+// Project URL: https://github.com/Zidizei/jSlide
+//				http://code.google.com/p/jslide/
 //              http://plugins.jquery.com/project/jslide
 //
 // Dependencies:
-// jQuery 1.3.2 (jquery.com)
+// jQuery 1.3.2+ (jquery.com)
+//
+// Optional:
+// jQuery Easing v1.3 (http://gsgd.co.uk/sandbox/jquery/easing/)
 
 (function($){
 
@@ -13,58 +17,13 @@
     {
         element = $(element);
         
-        this.calWidth = function(element)
-        {
-            var buffer = '0'; 
-            
-            if(!isNaN(element.find('.showcase').children().css('width').replace(/px/, '')))
-            buffer = element.find('.showcase').children().css('width').replace(/px/, '');
-                      
-            if(!isNaN(element.find('.showcase').children().css('marginRight').replace(/px/, '')))
-            buffer = Number(buffer) + Number(element.find('.showcase').children().css('marginRight').replace(/px/, ''));
-                       
-            if(!isNaN(element.find('.showcase').children().css('marginLeft').replace(/px/, '')))
-            buffer = Number(buffer) + Number(element.find('.showcase').children().css('marginLeft').replace(/px/, ''));
-            
-            if(!isNaN(element.find('.showcase').children().css('paddingLeft').replace(/px/, '')))
-            buffer = Number(buffer) + Number(element.find('.showcase').children().css('paddingLeft').replace(/px/, ''));
-            
-            if(!isNaN(element.find('.showcase').children().css('paddingRight').replace(/px/, '')))
-            buffer = Number(buffer) + Number(element.find('.showcase').children().css('paddingRight').replace(/px/, '')); 
-           
-            // yes, this weird function calculates the actual width of the <li>, including stuff like margin and padding ...           
-            return buffer;
-        }
-        
-        this.calHeight = function(element)
-        {
-            var buffer = '0';
-            
-            if(!isNaN(element.find('.showcase').children().css('height').replace(/px/, '')))
-            buffer = element.find('.showcase').children().css('height').replace(/px/, '');
-                      
-            if(!isNaN(element.find('.showcase').children().css('marginTop').replace(/px/, '')))
-            buffer = Number(buffer) + Number(element.find('.showcase').children().css('marginTop').replace(/px/, ''));
-                       
-            if(!isNaN(element.find('.showcase').children().css('marginBottom').replace(/px/, '')))
-            buffer = Number(buffer) + Number(element.find('.showcase').children().css('marginBottom').replace(/px/, ''));
-            
-            if(!isNaN(element.find('.showcase').children().css('paddingTop').replace(/px/, '')))
-            buffer = Number(buffer) + Number(element.find('.showcase').children().css('paddingTop').replace(/px/, ''));
-            
-            if(!isNaN(element.find('.showcase').children().css('paddingBottom').replace(/px/, '')))
-            buffer = Number(buffer) + Number(element.find('.showcase').children().css('paddingBottom').replace(/px/, '')); 
-           
-            // and this weird function calculates the actual height of the <li>, including stuff like margin and padding ...           
-            return buffer;
-        }        
-        
         var obj = this;
 
         this.settings = $.extend({}, $.fn.slide.defaults, options);
         this.settings.layersSize = element.find('.showcase').children().size();
-        this.settings.layerWidth = this.calWidth(element);
-        this.settings.layerHeight = this.calHeight(element);
+         this.settings.layerWidth = element.find('.showcase').children().outerWidth(true);
+        this.settings.layerHeight = element.find('.showcase').children().outerHeight(true);
+        
         
         /* To support old settings */
         
@@ -90,7 +49,7 @@
                 if(window.console && window.console.log) {
                     window.console.log('[jSlide:'+this.settings.slideNr+'] ' + message);
                 } else {
-                    alert('[jSlide:'+this.settings.slideNr+'] ' + message)
+                    alert('[jSlide:'+this.settings.slideNr+'] ' + message);
                 }
             }
         };
@@ -168,7 +127,7 @@
                     marginTop: "0px"
                 }, obj.settings.slideSpeed, obj.settings.easing);
 
-                obj.settings.slidePos = '0';
+                obj.settings.slidePos = 0;
             }
             else if(pos < "0" && obj.settings.layersSize > "1" && obj.settings.repeatPrev == "1")
             {   // reached the beginning of the line, go all the way to the end
@@ -200,8 +159,6 @@
                 return false;
             }
             
-           
-
             // change url (append #[slidepos/title]--[slidenr]
             if(obj.settings.usePanelId == 1 && obj.settings.loopNr == null && obj.settings.showPanelUrl == 1) {
             	var newPos = Number(obj.settings.slidePos+1);
@@ -248,33 +205,105 @@
                 }, obj.settings.preloadDelay);
             }
             
+            
+            // enable/disable prev/next button
+			if(obj.settings.disabledClass != false && obj.settings.slidePos == obj.settings.layersSize-1) {
+				if($('.jslide-next[rel='+element.attr('id')+']').length > 0) {
+					$('.jslide-next[rel='+element.attr('id')+']').addClass(obj.settings.disabledClass);
+				}
+				
+				if($('.jslide-next', element).length > 0) {
+					$('.jslide-next', element).addClass(obj.settings.disabledClass);
+				}
+			}
+			
+			if(obj.settings.disabledClass != false && obj.settings.slidePos == 0) {
+				if($('.jslide-previous[rel='+element.attr('id')+']').length > 0) {
+					$('.jslide-previous[rel='+element.attr('id')+']').addClass(obj.settings.disabledClass);
+				}
+				
+				if($('.jslide-previous', element).length > 0) {
+					$('.jslide-previous', element).addClass(obj.settings.disabledClass);
+				}
+            }
+            
+            if(obj.settings.disabledClass != false && obj.settings.slidePos != obj.settings.layersSize-1) {
+				if($('.jslide-next[rel='+element.attr('id')+']').length > 0) {
+					$('.jslide-next[rel='+element.attr('id')+']').removeClass(obj.settings.disabledClass);
+				}
+				
+				if($('.jslide-next', element).length > 0) {
+					$('.jslide-next', element).removeClass(obj.settings.disabledClass);
+				}
+            }
+            
+            if(obj.settings.disabledClass != false && obj.settings.slidePos != 0) {
+				if($('.jslide-previous[rel='+element.attr('id')+']').length > 0) {
+					$('.jslide-previous[rel='+element.attr('id')+']').removeClass(obj.settings.disabledClass);
+				}
+				
+				if($('.jslide-previous', element).length > 0) {
+					$('.jslide-previous', element).removeClass(obj.settings.disabledClass);
+				}
+			}
+			        
+            
             obj.switchCaption();
             obj.switchActive();
             obj.debug('#'+element.attr('id')+' slided to pos:'+Number(obj.settings.slidePos+1));
 
             return false;
-        };  
+        }; // this.slideTo() END
         
-        this.slidePrev = function() {
+        this.slidePrev = function(e) {
             obj.slideTo(obj.settings.slidePos-1);
+            
             if(obj.settings.slideIntervalAlt == '0' && obj.settings.slideShow == '1') {
                 clearInterval(obj.settings.loopNr);
             } else if(obj.settings.slideIntervalAlt > '0' && obj.settings.slideShow == '1') {
                 clearInterval(obj.settings.loopNr);
                 obj.settings.loopNr = window.setInterval(function(){ obj.slideTo(Number(obj.settings.slidePos+1)); }, obj.settings.slideIntervalAlt);
             }
-            return false;
+            
+            if(obj.settings.disabledClass != false && obj.settings.slidePos == 0) {
+				if($('.jslide-previous[rel='+element.attr('id')+']').length > 0) {
+					$('.jslide-previous[rel='+element.attr('id')+']').addClass(obj.settings.disabledClass);
+				}
+				
+				if($('.jslide-previous', element).length > 0) {
+					$('.jslide-previous', element).addClass(obj.settings.disabledClass);
+				}
+            } else {
+				if($('.jslide-previous[rel='+element.attr('id')+']').length > 0) {
+					$('.jslide-previous[rel='+element.attr('id')+']').removeClass(obj.settings.disabledClass);
+				}
+				
+				if($('.jslide-previous', element).length > 0) {
+					$('.jslide-previous', element).removeClass(obj.settings.disabledClass);
+				}
+				if($('.jslide-next[rel='+element.attr('id')+']').length > 0) {
+					$('.jslide-next[rel='+element.attr('id')+']').removeClass(obj.settings.disabledClass);
+				}
+				
+				if($('.jslide-next', element).length > 0) {
+					$('.jslide-next', element).removeClass(obj.settings.disabledClass);
+				}
+            }
+            
+            e.preventDefault();
         };
-        	
-        this.slideNext = function() {
+
+        this.slideNext = function(e) {
             obj.slideTo(Number(obj.settings.slidePos)+Number(1));
+
             if(obj.settings.slideIntervalAlt == '0' && obj.settings.slideShow == '1') {
                 clearInterval(obj.settings.loopNr);
             } else if(obj.settings.slideIntervalAlt > '0' && obj.settings.slideShow == '1') {
                 clearInterval(obj.settings.loopNr);
                 obj.settings.loopNr = window.setInterval(function(){ obj.slideTo(Number(obj.settings.slidePos+1)); }, obj.settings.slideIntervalAlt);
             }
-            return false;
+
+            e.preventDefault();
         };
         
         this.slideToTarget = function(){
@@ -310,7 +339,7 @@
 			}
 			
 			return false;
-		};
+		}; 
         
        
         this.debug('jSlide initiated for #'+element.attr('id'));
@@ -334,27 +363,22 @@
 
 
 		// Look for the Previous button (inside element or outside with specific rel attribute)        
-   		if($('.jslide-previous[rel='+element.attr('id')+']').length > 0 || $('.jslide-previous', element).length > 0)
-		{
-			if($('.jslide-previous[rel='+element.attr('id')+']').length > 0) {
-				$('.jslide-previous[rel='+element.attr('id')+']').bind('click', obj.slidePrev);
-			}
-			
-			if($('.jslide-previous', element).length > 0) {
-				$('.jslide-previous', element).bind('click', obj.slidePrev);
-			}
+		if($('.jslide-previous[rel='+element.attr('id')+']').length > 0) {
+			$('.jslide-previous[rel='+element.attr('id')+']').bind('click', obj.slidePrev);
 		}
 		
+		if($('.jslide-previous', element).length > 0) {
+			$('.jslide-previous', element).bind('click', obj.slidePrev);
+		}
+		
+		
 		// Look for the Next button (inside element or outside with specific rel attribute)        
-   		if($('.jslide-next[rel='+element.attr('id')+']').length > 0 || $('.jslide-next', element).length > 0)
-		{
-			if($('.jslide-next[rel='+element.attr('id')+']').length > 0) {
-				$('.jslide-next[rel='+element.attr('id')+']').bind('click', obj.slideNext);
-			}
-			
-			if($('.jslide-next', element).length > 0) {
-				$('.jslide-next', element).bind('click', obj.slideNext);
-			}
+		if($('.jslide-next[rel='+element.attr('id')+']').length > 0) {
+			$('.jslide-next[rel='+element.attr('id')+']').bind('click', obj.slideNext);
+		}
+		
+		if($('.jslide-next', element).length > 0) {
+			$('.jslide-next', element).bind('click', obj.slideNext);
 		}
 
         
@@ -486,7 +510,7 @@
         slideNr: '1',      // script vars, don't change
         loopNr: null,      // script vars, don't change
         slidePos: '0',     // script vars, don't change
-        debug: 0,                          // if TRUE, enables firebug console messages
+        debug: 0,                          // if TRUE, enables console messages
         showPanelUrl: 1,				   // if enabled, the current panel is saved in url. if disabled, nothing will show up up there (overrides autoInit!)
 		usePanelId: 1,					   // if TRUE, uses title of .panel instead of numbers for PanelUrl
 		slideSpeed: 500,				   // speed of slide effect
@@ -496,9 +520,10 @@
         easing: '',						   // easing
         autoInit: 1,					   // auto-slides to #element set in url when when set to true
         autoInitDelay: 300,				   // autoinit delay
-        panelList: 'auto',				   // 	
+        panelList: 'auto',				   // 'auto' generates <ul> inside slideshow element; with 'custom', panel list can be placed anywhere in the document
         repeatNex: 1,                      // next button: jump back to first element when reaching end
         repeatPrev: 0,                     // previous button: jump to last element when at the beginning
+        disabledClass: 'disabled',		   // class added to the next/previous button when at the beginning/end of slideshow (set to FALSE to disable functionality)
         direction: 'left',                 // left: content slides from right to LEFT (bottom to top); right: content slides from left to RIGHT (top to bottom)
         preloadImg: true,                  // if FALSE, images in the slideshow will only load when visible
         preloaderClass: 'loading',         // the classname the <li>-element containing the image(s) will have, when it's loading
