@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>jslide: default fade settings</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+
+<div id="wrapper">
+	<h1>jslide</h1>
+
+	<p>
+		<em>Yet another slideshow plugin for <a href="http://jquery.com">jQuery</a>.
+		Powered by <a href="http://coffeescript.org">Coffee</a>.</em>
+	</p>
+
+	<div id="slides-a" class="box">
+		<ul class="slides">
+			<li class="slide"><img src="images/123456.png" /></li>
+			<li class="slide">
+				<h2>Got Ma Nuts From A Hippy</h2>
+				<p>
+					Well she whispered in my ear<br />
+					we got to get us out of here<br />
+					to the country<br />
+					I asked her for a ride<br />
+					she took me aside<br />
+					she said "try me"<br />
+					I thought I'm gonna wake pretty soon <br />
+					In the middle of a Sunday afternoon<br />
+					just dreamin. And it was warm in the back of her van.<br />
+					Where she made me a real man.
+				</p>
+				<p>
+					She made me cry, she made me cry.<br />
+					Oh she made me cry, why she make me cry?
+				</p>
+			</li>
+			<li class="slide"><img src="images/4eee88.png" /></li>
+			<li class="slide"><img src="images/cce400.png" /></li>
+			<li class="slide"><img src="images/ff4e2b.png" /></li>
+			<li class="slide">
+				<h2>The Great Escape</h2>
+				<p>
+					They're breakin' both my hands<br />
+					They're breakin' both my hands<br />
+					They're tellin' me to take it like a man<br />
+					Take it like a man<br />
+					Well fu*k that<br />
+				</p>
+			</li>
+		</ul>
+	</div>
+
+	<p>
+		This is the <strong>default fade in/out</strong> behaviour of the plugin with a <strong>minimal</strong> <em>Html</em> setup.
+	</p>
+
+	<h2>JavaScript</h2>
+	<pre><code>$('#slides-a').jslide({
+	mode: 'fade'
+});</code></pre>
+
+	<h3>Options</h3>
+	<p>
+		The following are options relevant to this example. See <a href="#doc-options">the documentation</a> for a list of all
+		available options.<br />
+		The shown usage examples are <strong>default settings</strong>.
+	</p>
+	<h4>mode (<code>'slide'</code> / <code>'fade'</code>)</h4>
+	<p>
+		Determines the animation style of the slideshow.
+	</p>
+	<pre><code class="excerpt">$('#slides-a').jslide({
+	<b>mode: 'slide'</b>
+});</code></pre>
+
+	<h2>Html</h2>
+	<pre><code>&lt;div id="slides-container">
+	&lt;ul id="slides">
+		&lt;li class="slide">&lt;img src="images/123456.png" />&lt;/li>
+		&lt;li class="slide">
+			&lt;h2>Got Ma Nuts From A Hippy&lt;/h2>
+			&lt;p>
+				Well she whispered in my ear&lt;br />
+				we got to get us out of here&lt;br />
+				to the country&lt;br />
+				I asked her for a ride&lt;br />
+				she took me aside&lt;br />
+				she said "try me"&lt;br />
+				I thought I'm gonna wake pretty soon &lt;br />
+				In the middle of a Sunday afternoon&lt;br />
+				just dreamin. And it was warm in the back of her van.&lt;br />
+				Where she made me a real man.
+			&lt;/p>
+			&lt;p>
+				She made me cry, she made me cry.&lt;br />
+				Oh she made me cry, why she make me cry?
+			&lt;/p>
+		&lt;/li>
+		&lt;li class="slide">&lt;img src="images/4eee88.png" />&lt;/li>
+		&lt;li class="slide">&lt;img src="images/cce400.png" />&lt;/li>
+		&lt;li class="slide">&lt;img src="images/ff4e2b.png" />&lt;/li>
+		&lt;li class="slide">
+			&lt;h2>The Great Escape&lt;/h2>
+			&lt;p>
+				They're breakin' both my hands&lt;br />
+				They're breakin' both my hands&lt;br />
+				They're tellin' me to take it like a man&lt;br />
+				Take it like a man&lt;br />
+				Well fu*k that&lt;br />
+			&lt;/p>
+		&lt;/li>
+	&lt;/ul>
+&lt;/div></code>
+</pre>
+
+</div>
+
+<script type="text/javascript" src="../assets/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../plugin/jslide.js"></script>
+<script type="text/javascript">
+
+$('#slides-a').jslide({
+	mode: 'fade'
+});
+
+</script>
+
+</body>
+</html>

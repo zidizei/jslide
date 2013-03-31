@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>jslide: default slide settings with navigational links</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+
+<div id="wrapper">
+	<h1>jslide</h1>
+
+	<p>
+		<em>Yet another slideshow plugin for <a href="http://jquery.com">jQuery</a>.
+		Powered by <a href="http://coffeescript.org">Coffee</a>.</em>
+	</p>
+
+	<div id="slides-a" class="box">
+		<ul class="slides">
+			<li class="slide"><img src="images/123456.png" /></li>
+			<li class="slide"><img src="images/4eee88.png" /></li>
+			<li class="slide"><img src="images/cce400.png" /></li>
+			<li class="slide"><img src="images/ff4e2b.png" /></li>
+		</ul>
+		<nav>
+			<a class="prev-slide" href="#">&laquo;</a>
+			<a class="next-slide" href="#">&raquo;</a>
+		</nav>
+	</div>
+
+	<p>
+		This is the <strong>default</strong> behaviour of the plugin with some extra <strong>navigational</strong>
+		<em>Html</em> setup to display <strong>Next</strong> and <strong>Previous Slide</strong> links.
+	</p>
+
+	<h2>JavaScript</h2>
+	<pre><code>$('#slides-a').jslide();</code></pre>
+
+	<p>
+		As you can see, the JavaScript is just a default plugin call. Navigation is actually enabled by inserting
+		the <em>Html</em>. The plugin looks for elements inside the outer element (the one you call the plugin on)
+		that match the selectors for a <em>Next</em> and <em>Previous</em> link and binds the corresponding
+		<em>click</em> events to them.
+	</p>
+	<h3>Options</h3>
+	<p>
+		The following are options relevant to this example. See <a href="#doc-options">the documentation</a> for a list of all
+		available options.<br />
+		The shown usage examples are <strong>default settings</strong>.
+	</p>
+	<h4>next (string)</h4>
+	<p>
+		Selector for <em>Next Slide</em> link.
+	</p>
+	<pre><code class="excerpt">$('#slides-a').jslide({
+	<b>next: 'a.next-slide'</b>
+});</code></pre>
+	<h4>prev (string)</h4>
+	<p>
+		Selector for <em>Previous Slide</em> link.
+	</p>
+	<pre><code class="excerpt">$('#slides-a').jslide({
+	<b>prev: 'a.prev-slide'</b>
+});</code></pre>
+
+	<h2>Html</h2>
+	<pre><code>&lt;div id="slides-container">
+	&lt;ul id="slides-wrapper">
+		&lt;li class="slides">&lt;img src="images/123456.png" />&lt;/li>
+		&lt;li class="slides">&lt;img src="images/4eee88.png" />&lt;/li>
+		&lt;li class="slides">&lt;img src="images/cce400.png" />&lt;/li>
+		&lt;li class="slides">&lt;img src="images/ff4e2b.png" />&lt;/li>
+	&lt;/ul>
+	&lt;nav>
+		&lt;a class="prev-slide" href="#">&amp;laquo;&lt;/a>
+		&lt;a class="next-slide" href="#">&amp;raquo;&lt;/a>
+	&lt;/nav>
+&lt;/div></code></pre>
+
+</div>
+
+<script type="text/javascript" src="../assets/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../plugin/jslide.js"></script>
+<script type="text/javascript">
+
+$('#slides-a').jslide();
+
+</script>
+
+</body>
+</html>

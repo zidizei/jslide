@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>jslide: default slide settings with navigational links and pagination (tabs)</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+
+<div id="wrapper">
+	<h1>jslide</h1>
+
+	<p>
+		<em>Yet another slideshow plugin for <a href="http://jquery.com">jQuery</a>.
+		Powered by <a href="http://coffeescript.org">Coffee</a>.</em>
+	</p>
+
+	<div id="slides-a" class="box">
+		<ul class="slides">
+			<li class="slide">
+				<aside class="slide-pagination first-slide">
+					<h3>Slide 1</h3>
+					<a href="#" class="goto-slide">View</a>
+				</aside>
+				<img src="images/123456.png" />
+			</li>
+			<li class="slide">
+				<aside class="slide-pagination second-slide">
+					<h3>Slide 2</h3>
+					<a href="#" class="goto-slide">View</a>
+				</aside>
+				<img src="images/4eee88.png" />
+			</li>
+			<li class="slide">
+				<aside class="slide-pagination third-slide">
+					<h3>Slide 3</h3>
+					<a href="#" class="goto-slide">View</a>
+				</aside>
+				<img src="images/cce400.png" />
+			</li>
+			<li class="slide">
+				<aside class="slide-pagination fourth-slide">
+					<h3>Slide 4</h3>
+					<a href="#" class="goto-slide">View</a>
+				</aside>
+				<img src="images/ff4e2b.png" />
+			</li>
+		</ul>
+		<nav class="slide-pagination">
+			<a class="prev-slide" href="#">&laquo;</a>
+			<a class="next-slide" href="#">&raquo;</a>
+		</nav>
+	</div>
+
+	<br style="clear: both" />
+
+	<p>
+		This is the <strong>default</strong> behaviour of the plugin with extra <strong>navigational</strong>
+		<em>Html</em> setup to display <strong>Next</strong> and <strong>Previous Slide</strong> as well as
+		<strong>custom pagination</strong> links (called <em>Tabs</em>).
+	</p>
+
+	<h2>JavaScript</h2>
+	<pre><code>$('#slides-a').jslide({
+	pagination: 'tabs'
+});</code></pre>
+
+	<p>
+		The plugin will automatically add <code>&lt;a></code> tags for pagination if it can't find any custom ones.
+	</p>
+	<h3>Options</h3>
+	<p>
+		The following are options relevant to this example. See <a href="#doc-options">the documentation</a> for a list of all
+		available options.<br />
+		The shown usage examples are <strong>default settings</strong>.
+	</p>
+
+	<h4>pagination (<code>'tabs'</code> / <code>'preview'</code> / <code>'scroll'</code> / <code>false</code>)</h4>
+	<p>
+		Pagination Mode. Set to false to disable. <code>tabs</code> is used in this example. <code>preview</code> is similar but
+		instead of a list of pagination links, it will display them in the order of appearence inside a slideshow as well.
+	</p>
+	<pre><code class="excerpt">$('#slides-a').jslide({
+	<b>pagination: false</b>
+});</code></pre>
+
+	<h4>paginationClass (string)</h4>
+	<p>
+		Class name of the element to contain the pagination links.
+	</p>
+	<pre><code class="excerpt">$('#slides-a').jslide({
+	<b>paginationClass: 'slide-pagination'</b>
+});</code></pre>
+
+	<h4>slidetoClass (string)</h4>
+	<p>
+		Class name of the <code>&lt;a></code> tags for pagination.
+	</p>
+	<pre><code class="excerpt">$('#slides-a').jslide({
+	<b>slidetoClass: 'goto-slide'</b>
+});</code></pre>
+
+	<h2>Html</h2>
+	<pre><code>&lt;div id="slides-a" class="box">
+	&lt;ul class="slides">
+		&lt;li class="slide">
+			&lt;aside class="slide-pagination first-slide">
+				&lt;h3>Slide 1&lt;/h3>
+				&lt;a href="#" class="goto-slide">View&lt;/a>
+			&lt;/aside>
+			&lt;img src="images/123456.png" />
+		&lt;/li>
+		&lt;li class="slide">
+			&lt;aside class="slide-pagination second-slide">
+				&lt;h3>Slide 2&lt;/h3>
+				&lt;a href="#" class="goto-slide">View&lt;/a>
+			&lt;/aside>
+			&lt;img src="images/4eee88.png" />
+		&lt;/li>
+		&lt;li class="slide">
+			&lt;aside class="slide-pagination third-slide">
+				&lt;h3>Slide 3&lt;/h3>
+				&lt;a href="#" class="goto-slide">View&lt;/a>
+			&lt;/aside>
+			&lt;img src="images/cce400.png" />
+		&lt;/li>
+		&lt;li class="slide">
+			&lt;aside class="slide-pagination fourth-slide">
+				&lt;h3>Slide 4&lt;/h3>
+				&lt;a href="#" class="goto-slide">View&lt;/a>
+			&lt;/aside>
+			&lt;img src="images/ff4e2b.png" />
+		&lt;/li>
+	&lt;/ul>
+	&lt;nav class="slide-pagination">
+		&lt;a class="prev-slide" href="#">&amp;laquo;&lt;/a>
+		&lt;a class="next-slide" href="#">&amp;raquo;&lt;/a>
+	&lt;/nav>
+&lt;/div></code></pre>
+
+	<p>
+		The content of a <em>Tab</em> sits inside the <em>slide</em>
+		element it is referring to and is identified by a class name. The Tabs are copied into a wrapper element
+		with the same class name as the tabs.
+	</p>
+	
+	<h3>Resulting Html</h3>
+	<pre><code>&lt;div id="slides-a" class="box">
+	&lt;ul class="slides">
+		&lt;li class="slide">
+			&lt;img src="images/123456.png" />
+		&lt;/li>
+		&lt;li class="slide">
+			&lt;img src="images/4eee88.png" />
+		&lt;/li>
+		&lt;li class="slide">
+			&lt;img src="images/cce400.png" />
+		&lt;/li>
+		&lt;li class="slide">
+			&lt;img src="images/ff4e2b.png" />
+		&lt;/li>
+	&lt;/ul>
+	&lt;nav class="slide-pagination">
+		&lt;a class="prev-slide" href="#">&amp;laquo;&lt;/a>
+		&lt;a class="next-slide" href="#">&amp;raquo;&lt;/a><strong>
+		&lt;aside class="goto-slide first-slide">
+			&lt;h3>Slide 1&lt;/h3>
+			&lt;a href="#" class="goto-slide">View&lt;/a>
+		&lt;/aside>
+		&lt;aside class="goto-slide second-slide">
+			&lt;h3>Slide 2&lt;/h3>
+			&lt;a href="#" class="goto-slide">View&lt;/a>
+		&lt;/aside>
+		&lt;aside class="goto-slide third-slide">
+			&lt;h3>Slide 3&lt;/h3>
+			&lt;a href="#" class="goto-slide">View&lt;/a>
+		&lt;/aside>
+		&lt;aside class="goto-slide fourth-slide">
+			&lt;h3>Slide 4&lt;/h3>
+			&lt;a href="#" class="goto-slide">View&lt;/a>
+		&lt;/aside></strong>
+	&lt;/nav>
+&lt;/div></code></pre>
+
+	<p>
+		Note that the plugin retains tag name and additional classes.
+	</p>
+
+</div>
+
+<script type="text/javascript" src="../assets/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../plugin/jslide.js"></script>
+<script type="text/javascript">
+
+$('#slides-a').jslide({
+	pagination: 'tabs'
+});
+
+</script>
+
+</body>
+</html>

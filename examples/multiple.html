@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>multiple jslide: default settings</title>
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+
+<div id="wrapper">
+	<h1>jslide</h1>
+
+	<p>
+		<em>Yet another slideshow plugin for <a href="http://jquery.com">jQuery</a>.
+		Powered by <a href="http://coffeescript.org">Coffee</a>.</em>
+	</p>
+
+	<div id="slides-a" class="box">
+		<ul class="slides">
+			<li class="slide"><img src="images/4eee88.png" /></li>
+			<li class="slide"><img src="images/ff4e2b.png" /></li>
+			<li class="slide">
+				<h2>The Great Escape</h2>
+				<p>
+					They're breakin' both my hands<br />
+					They're breakin' both my hands<br />
+					They're tellin' me to take it like a man<br />
+					Take it like a man<br />
+					Well fu*k that<br />
+				</p>
+			</li>
+		</ul>
+	</div>
+
+	<div id="slides-b" class="box">
+		<ul class="slides">
+			<li class="slide"><img src="images/123456.png" /></li>
+			<li class="slide"><img src="images/4eee88.png" /></li>
+			<li class="slide"><img src="images/ff4e2b.png" /></li>
+			<li class="slide"><img src="images/cce400.png" /></li>
+		</ul>
+	</div>
+
+	<div id="slides-c" class="box">
+		<ul class="slides">
+			<li class="slide"><img src="images/cce400.png" /></li>
+			<li class="slide"><img src="images/123456.png" /></li>
+			<li class="slide"><img src="images/4eee88.png" /></li>
+			<li class="slide"><img src="images/ff4e2b.png" /></li>
+		</ul>
+	</div>
+
+<script type="text/javascript" src="../assets/jquery.min.js"></script>
+<script type="text/javascript" src="../assets/jquery.easing.min.js"></script>
+<script type="text/javascript" src="../plugin/jslide.js"></script>
+<script type="text/javascript">
+
+$('#slides-a, #slides-b').jslide({
+	mode: 'fade'
+});
+
+$('#slides-c').jslide();
+
+</script>
+
+</body>
+</html>
