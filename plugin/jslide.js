@@ -23,7 +23,7 @@
 
   Jslide.prototype = {
     init: function() {
-      var i, tabContent, tabWrapper, tabWrapperClasses, _i, _j, _ref, _ref1,
+      var animWrapper, i, tabContent, tabWrapper, tabWrapperClasses, wrapperClass, wrapperTag, _i, _j, _ref, _ref1,
         _this = this;
       this.log(this.options);
       this.wrapper.css('overflow', 'hidden');
@@ -40,10 +40,18 @@
         this.slides.css('height', this.options.height);
       }
       this.wrapper.find(this.options.slides + ':first').addClass(this.options.activeClass);
+      animWrapper = this.options.animationWrapper.split('.');
+      if (animWrapper.length <= 1) {
+        wrapperTag = 'div';
+        wrapperClass = animWrapper[0];
+      } else {
+        wrapperTag = animWrapper[0];
+        wrapperClass = animWrapper[1];
+      }
       if (this.options.mode === 'slide') {
         this.slides.css('float', 'left');
-        this.slides.wrapAll('<div class="' + this.options.wrapperClass + '" />');
-        $('div.' + this.options.wrapperClass, this.element).css('width', this.slides.length * this.slides.outerWidth() + 'px');
+        this.slides.wrapAll('<' + wrapperTag + ' class="' + wrapperClass + '" />');
+        $(wrapperTag + '.' + wrapperClass, this.element).css('width', this.slides.length * this.slides.outerWidth() + 'px');
       } else if (this.options.mode === 'fade') {
         this.slides.css({
           float: 'none',
@@ -151,7 +159,7 @@
       }
       oldActive.removeClass(this.options.activeClass);
       newActive.addClass(this.options.activeClass);
-      if (this.options.paginationClass) {
+      if (this.options.paginationClass && this.paginationWrapper) {
         this.paginationWrapper.find('.' + this.options.activeClass).removeClass(this.options.activeClass);
         return this.paginationLinks.eq(to).addClass(this.options.activeClass);
       }
@@ -227,9 +235,9 @@
     width: 600,
     height: 350,
     wrapper: 'ul.slides',
+    animationWrapper: 'ul.slides-wrapper',
     slides: 'li.slide',
     activeClass: 'active',
-    wrapperClass: 'slides-wrapper',
     paginationClass: 'slide-pagination',
     slidetoClass: 'goto-slide',
     next: 'a.next-slide',

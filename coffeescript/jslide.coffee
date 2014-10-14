@@ -37,10 +37,19 @@ Jslide.prototype =
 		# add the active class to the first slide
 		@wrapper.find(@options.slides + ':first').addClass(@options.activeClass)
 
+		animWrapper = @options.animationWrapper.split('.')
+
+		if animWrapper.length <= 1
+			wrapperTag = 'div'
+			wrapperClass = animWrapper[0]
+		else
+			wrapperTag   = animWrapper[0]
+			wrapperClass = animWrapper[1]
+
 		if @options.mode == 'slide'
 			@slides.css 'float', 'left'
-			@slides.wrapAll('<div class="' + @options.wrapperClass + '" />')
-			$('div.' + @options.wrapperClass, @element).css 'width', @slides.length * @slides.outerWidth() + 'px'
+			@slides.wrapAll('<' + wrapperTag + ' class="' + wrapperClass + '" />')
+			$(wrapperTag + '.' + wrapperClass, @element).css 'width', @slides.length * @slides.outerWidth() + 'px'
 		else if @options.mode == 'fade'
 			@slides.css
 				float: 'none'
@@ -147,7 +156,7 @@ Jslide.prototype =
 		newActive.addClass(@options.activeClass)
 
 		# change the active pagination link as well if pagination is enabled
-		if @options.paginationClass
+		if @options.paginationClass && @paginationWrapper
 			@paginationWrapper.find('.' + @options.activeClass).removeClass(@options.activeClass)
 			@paginationLinks.eq(to).addClass(@options.activeClass)
 
@@ -208,13 +217,13 @@ $.fn.jslide.defaults =
 	speed: 750
 	easing: 'easeOutQuint'
 	mode: 'slide'					# 'fade'
-	pagination: false				# 'tabs' / 'preview' / 'scroll'
+	pagination: false				# 'tabs' / 'scroll'
 	width: 600
 	height: 350
 	wrapper: 'ul.slides'
+	animationWrapper: 'ul.slides-wrapper'
 	slides: 'li.slide'
 	activeClass: 'active'
-	wrapperClass: 'slides-wrapper'
 	paginationClass: 'slide-pagination'
 	slidetoClass: 'goto-slide'
 	next: 'a.next-slide'
